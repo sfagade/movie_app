@@ -34,12 +34,30 @@ const MOVIE_DATA = [
     }
 ];
 
+const CATEGORY_DATA = [
+    { id: 'c-1', name: 'drama' },
+    { id: 'c-2', name: 'action' },
+    { id: 'c-3', name: 'adventeru' },
+    { id: 'c-4', name: 'historical' },
+];
+
+// 1. get categoeries function
+// 2. get categories in index page  
+
+export const getCategories = () => {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve(CATEGORY_DATA);
+        }, 50)
+    })
+}
+
 export const getMovies = () => {
 
     return new Promise((resolve, reject) => {
         setTimeout(() => {
             resolve(MOVIE_DATA);
-        }, 2000)
+        }, 50)
     })
 }
 
