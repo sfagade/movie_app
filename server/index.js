@@ -6,7 +6,10 @@ const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
 const handle = app.getRequestHandler()
 
-const moviesData = require("./data.json");
+const filePath = "./data.json";
+const fs = require('fs');
+const path = require('path');
+const moviesData = require(filePath);
 
 app.prepare().then(() => {
 
@@ -24,12 +27,22 @@ app.prepare().then(() => {
     })
 
     server.post("/api/v1/movies", (req, res) => {
-        const movie = res.body;
-        console.log(JSON.stringify(movie));
-        return res.json({ ...movie, createdTime: 'today', author: 'Samson' });
+        const movie = req.body;
+        moviesData.push(movie);
+
+        const pathToFile = path.join(__dirname, filePath);
+        const stringifiedData = JSON.stringify(moviesData, null, 2);
+
+        fs.writeFile(pathToFile, stringifiedData, (err) => {
+            if (err) {
+                return res.status(422).send(err);
+            }
+            console.log("About to return: ");
+            return res.json("Movies has been successfully added");
+        });
     })
 
-    server.path("/api/v1/movies/:id", (req, res) => {
+    server.patch("/api/v1/movies/:id", (req, res) => {
         const { id } = req.params;
         return res.json({ message: `Updating post of if: ${id}` });
     })

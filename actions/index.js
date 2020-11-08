@@ -32,24 +32,12 @@ export const getMovies = () => {
 
 export const createMovie = (movie) => {
 
-    return new Promise((resolve, reject) => {
-        movie.id = Math.random().toString(36).substr(2, 7);
-        console.log("Movie id is: ", movie.id);
-        MOVIE_DATA.push(movie);
-        setTimeout(() => {
-            resolve(MOVIE_DATA);
-        }, 50)
-    })
+    movie.id = Math.random().toString(36).substr(2, 5);
+    return axios.post(`${BASE_URL}/api/v1/movies`, movie).then(res => res.data);
 }
 
 export const getMovieById = (movie_id) => {
 
     return axios.get(`${BASE_URL}/api/v1/movies/${movie_id}`).then(res => res.data);
 
-
-    /** return new Promise((resolve) => {
-        const movieIndex = MOVIE_DATA.findIndex(m => m.id === movie_id)
-        const movie = MOVIE_DATA[movieIndex];
-        setTimeout(() => resolve(movie), 50)
-    }) */
 }
