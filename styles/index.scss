@@ -1,0 +1,31 @@
+body {
+    min-height: 100vh;
+    position: relative;
+    margin: 0;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.home-page {
+    .movie-genre {
+        font-size: 14px;
+        font-style: italic;
+    }
+}
+
+.navbar {
+    min-height: 80px;
+
+    > li > a {
+        font-size: 90px;
+    }
+}
+
+.navbar-brand {
+    font-size: 30px;
+    font-weight: bold;
+}

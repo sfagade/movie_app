@@ -6,9 +6,10 @@ const MOVIE_DATA = [
 ];
 
 const CATEGORY_DATA = [
+    { id: 'c-5', name: 'all' },
     { id: 'c-1', name: 'drama' },
     { id: 'c-2', name: 'action' },
-    { id: 'c-3', name: 'adventeru' },
+    { id: 'c-3', name: 'adventure' },
     { id: 'c-4', name: 'historical' },
 ];
 
@@ -37,8 +38,11 @@ export const createMovie = (movie) => {
 }
 
 export const getMovieById = (movie_id) => {
-    console.log("getMoviebyId: ", movie_id);
     return axios.get(`${BASE_URL}/api/v1/movies/${movie_id}`).then(res => res.data);
+}
+
+export const updateMovie = (movie) => {
+    return axios.patch(`${BASE_URL}/api/v1/movies/${movie.id}`, movie).then(res => res.data);
 }
 
 export const deleteMovie = (id) => {
