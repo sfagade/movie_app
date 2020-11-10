@@ -1,16 +1,23 @@
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const MovieCreateForm = (props) => {
 
-    const [form, setForm] = useState({
+    const [isInitialDataLoaded, setInitialDataLoaded] = useState(false);
+    const defaultData = {
         name: '',
         description: '',
         rating: '',
         image: '',
         cover: '',
         longDesc: ''
-    });
+    }
+
+    const formData = props.initialData ? { ...props.initialData } : defaultData;
+
+    const [form, setForm] = useState(formData);
+
+
 
     const handleChange = (event) => {
         const name = event.target.name;
@@ -41,7 +48,6 @@ const MovieCreateForm = (props) => {
 
     return (
         <form>
-            { JSON.stringify(form)}
             <div className="form-group">
                 <label htmlFor="name">Name</label>
                 <input
